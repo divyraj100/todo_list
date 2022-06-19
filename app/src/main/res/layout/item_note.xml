@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="12dp"
-    android:background="#abcdef">
+    android:background="@drawable/bg_primary"
+    app:layout_constraintCircleRadius="12dp">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/deleteButton"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="16dp"
-        android:textSize="16sp"
-        tools:text = "Swapnil"
-        android:textColor="#212121"
 
-        />
-    <ImageView
-        android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:src="@drawable/ic_outline_delete_forever_24"
-        app:layout_constraintTop_toTopOf="@id/text"
-        app:layout_constraintBottom_toBottomOf="@id/text"
-        app:layout_constraintRight_toRightOf="parent"
+        <TextView
+            android:id="@+id/tvTaskText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="20sp"
+            tools:text="deed"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_centerVertical="true" />
 
-        />
+        <ImageView
+            android:id="@+id/btnDeleteTask"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_radio_button_unchecked_24"
+            android:layout_alignParentRight="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

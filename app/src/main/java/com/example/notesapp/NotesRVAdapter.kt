@@ -7,49 +7,38 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 import kotlin.collections.ArrayList
 
-class NotesRVAdapter(private val context: Context, private val listener: INotesRVAdapter): RecyclerView.Adapter<NotesRVAdapter.NoteViewHolder>() {
-    private val allNotes = ArrayList<Note>()
+class NotesRVAdapter(private val context: Context, private val listener: INotesRVAdapter)
+    : RecyclerView.Adapter<NotesRVAdapter.NoteViewHolder>() {
+    private val allTask = ArrayList<Note>()
 
     inner class NoteViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-
-        val textView:TextView = itemView.findViewById<TextView>(R.id.text)
-        val deleteButton:ImageView = itemView.findViewById<ImageView>(R.id.deleteButton)
-
+        val taskText:TextView = itemView.findViewById<TextView>(R.id.tvTaskText)
+        val deleteTask:ImageView = itemView.findViewById<ImageView>(R.id.btnDeleteTask)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
 
         val viewHolder = NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.item_note,parent,false))
-        viewHolder.deleteButton.setOnClickListener{
-            listener.onItemClicked((allNotes[viewHolder.adapterPosition]))
-
+        viewHolder.deleteTask.setOnClickListener{
+            listener.onItemClicked((allTask[viewHolder.adapterPosition]))
         }
-
         return viewHolder
-
-
     }
 
     override fun getItemCount(): Int {
-        return allNotes.size
-
+        return allTask.size
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-
-        val currentNote = allNotes[position]
-        holder.textView.text = currentNote.text
-
-
+        val currentNote = allTask[position]
+        holder.taskText.text = currentNote.text
     }
 
     fun updateList(newList : List<Note>){
-
-        allNotes.clear()
-        allNotes.addAll(newList)
+        allTask.clear()
+        allTask.addAll(newList)
 
         notifyDataSetChanged()
     }

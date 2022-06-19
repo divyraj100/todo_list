@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_note.*
 
 class MainActivity : AppCompatActivity(), INotesRVAdapter {
 
@@ -16,14 +15,17 @@ class MainActivity : AppCompatActivity(), INotesRVAdapter {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        supportActionBar!!.title = "My Tasks"
+
+        rvTask.layoutManager = LinearLayoutManager(this)
         val adapter  = NotesRVAdapter(this,this)
-        recyclerView.adapter = adapter
+        rvTask.adapter = adapter
 
         viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
-        viewModel.allNotes.observe(this, Observer {list->
+        viewModel.allTask.observe(this, Observer { list->
             list?.let {
                 adapter.updateList(it)
             }
@@ -31,22 +33,15 @@ class MainActivity : AppCompatActivity(), INotesRVAdapter {
     }
 
     override fun onItemClicked(note: Note) {
-
-        viewModel.deleteNote(note)
-        Toast.makeText(this , "${note.text}Deleted",Toast.LENGTH_LONG).show()
-
-
+        viewModel.deleteTask(note)
+        Toast.makeText(this , " ${note.text} Completed",Toast.LENGTH_SHORT).show()
     }
 
     fun submitData(view: View) {
-        val noteText = input.text.toString()
+        val noteText = etTask.text.toString()
         if (noteText.isNotEmpty()){
-            viewModel.insertNote(Note(noteText))
-            Toast.makeText(this , "$noteText Inserted",Toast.LENGTH_LONG).show()
-
-
+            viewModel.insertTask(Note(noteText))
+            Toast.makeText(this , "$noteText Added",Toast.LENGTH_SHORT).show()
         }
-
-
     }
 }
